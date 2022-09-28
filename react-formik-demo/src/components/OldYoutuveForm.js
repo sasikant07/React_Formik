@@ -38,7 +38,7 @@ const onSubmit = values => {
     console.log("Form values: ", values);
 }
 
-const YoutubeForm = () => {
+const OldYoutubeForm = () => {
     const formik = useFormik({
         initialValues,
         onSubmit,
@@ -46,7 +46,7 @@ const YoutubeForm = () => {
         validationSchema
     });
 
-    console.log("Formik Values: ", formik.touched)
+    // console.log("Formik Values: ", formik.touched)
 
     return (
         <div>
@@ -57,7 +57,9 @@ const YoutubeForm = () => {
                     <input 
                         type='text' 
                         id='name' name='name' 
-                        {... formik.getFieldProps('name')} />
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.name} />
                     { formik.touched.name && formik.errors.name ? <div className='error'>{formik.errors.name}</div> : null}
                 </div>
 
@@ -67,7 +69,9 @@ const YoutubeForm = () => {
                     type='email' 
                     id='email' 
                     name='email' 
-                    {... formik.getFieldProps('email')} />
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur} 
+                    value={formik.values.email} />
                     {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
                 </div>
                 <div className='form-control'>
@@ -76,7 +80,9 @@ const YoutubeForm = () => {
                     type='text' 
                     id='channel' 
                     name='channel' 
-                    {... formik.getFieldProps('channel')} />
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur} 
+                    value={formik.values.channel} />
                     {formik.touched.channel && formik.errors.channel ? <div className='error'>{formik.errors.channel}</div> : null}
                 </div>
                 <button type='submit'>Submit</button>
@@ -85,4 +91,4 @@ const YoutubeForm = () => {
     )
 }
 
-export default YoutubeForm
+export default OldYoutubeForm
