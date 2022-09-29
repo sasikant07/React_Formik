@@ -5,7 +5,9 @@ import * as Yup from 'yup';
 const initialValues = {
     name: 'Vishwas',
     email: '',
-    channel: ''
+    channel: '',
+    comment: '',
+    address: ''
 }
 
 const validate = values => {
@@ -43,14 +45,14 @@ const YoutubeForm = () => {
     // console.log("Formik Values: ", formik.touched)
 
     return (
-            // <h1>Youtube Form</h1>
+        // <h1>Youtube Form</h1>
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             <Form>
                 <div className='form-control'>
                     <label htmlFor='name'>Name</label>
                     <Field
                         type='text'
-                        id='name' 
+                        id='name'
                         name='name' />
                     <ErrorMessage name='name' />
                 </div>
@@ -69,8 +71,31 @@ const YoutubeForm = () => {
                         type='text'
                         id='channel'
                         name='channel'
+                        placeholder="Youtube channel name..."
                     />
                     <ErrorMessage name='channel' />
+                </div>
+                <div className='form-control'>
+                    <label htmlFor='comments'>Comments</label>
+                    <Field as="textarea" id='comments' name="comments" />
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor='address'>Address</label>
+                    <Field name='address'>
+                        {
+                            (props) => {
+                                console.log(props);
+                                const {field, Form, meta} = props;
+                                return (
+                                    <div>
+                                        <input type='text' id='address' {...field} />
+                                        {meta.touched && meta.error ? <div>{meta.error}</div>: null}
+                                    </div>
+                                )
+                            }
+                        }
+                    </Field>
                 </div>
                 <button type='submit'>Submit</button>
             </Form>
